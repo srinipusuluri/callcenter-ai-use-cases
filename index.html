@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Call Center & Customer Service - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --call-center-green: #22c55e;
+            --service-blue: #3b82f6;
+            --support-orange: #f59e0b;
+            --resolution-purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--call-center-green), var(--service-blue), var(--support-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--call-center-green), var(--service-blue));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--call-center-green), var(--service-blue), var(--support-orange));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(34, 197, 94, 0.2); color: var(--call-center-green); }
+        .icon.gen { background: rgba(59, 130, 246, 0.2); color: var(--service-blue); }
+        .icon.ag { background: rgba(139, 92, 246, 0.2); color: var(--resolution-purple); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--call-center-green), var(--service-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--call-center-green);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--call-center-green);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--call-center-green);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .call-center-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .service-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .resolution-badge {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📞 AI in Call Center & Customer Service</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Contact Center Operations, Customer Experience, and Service Optimization</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for call center optimization, customer behavior analysis, and service performance management
+            </p>
+
+            <div class="card-grid">
+                <!-- Call Volume Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📊</div>
+                        <div>
+                            <div class="card-title">Call Volume Forecasting</div>
+                            <div class="card-subtitle">Workforce Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict hourly and daily inbound call volumes to optimize staffing levels, reduce wait times, and improve service efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Time Series Analysis</span>
+                            <span class="tech-tag">Volume Prediction</span>
+                            <span class="tech-tag">Workforce Optimization</span>
+                            <span class="tech-tag">Demand Forecasting</span>
+                            <span class="tech-tag">Staffing Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Historical Data → Pattern Analysis → Volume Prediction → Staffing → Optimization → Efficiency</div>
+                            <div class="architecture-item">Call Data → Forecasting → Scheduling → Resource → Management → Performance</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical call volume data</li>
+                                <li>Time-of-day patterns</li>
+                                <li>Seasonal trends</li>
+                                <li>Marketing campaign impact</li>
+                                <li>Day-of-week variations</li>
+                                <li>External factors (weather, events)</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Volume Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Staffing Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Wait Time Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AHT Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⏱️</div>
+                        <div>
+                            <div class="card-title">AHT Prediction</div>
+                            <div class="card-subtitle">Handle Time Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict Average Handle Time for calls to optimize scheduling, agent training, and call routing strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Handle Time Analysis</span>
+                            <span class="tech-tag">Call Duration Prediction</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                            <span class="tech-tag">Routing Strategy</span>
+                            <span class="tech-tag">Efficiency Metrics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Call Data → Duration Analysis → Prediction → Routing → Optimization → Efficiency</div>
+                            <div class="architecture-item">Agent Data → Time Analysis → Prediction → Training → Improvement → Performance</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical call duration data</li>
+                                <li>Call type categorization</li>
+                                <li>Agent performance metrics</li>
+                                <li>Issue complexity levels</li>
+                                <li>Time-of-day factors</li>
+                                <li>Customer history</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Time Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Routing Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Handle Time Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Churn Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Customer Churn</div>
+                            <div class="card-subtitle">Retention Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict customer churn probability based on call patterns, satisfaction scores, and interaction history to implement retention strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Churn Analysis</span>
+                            <span class="tech-tag">Customer Behavior</span>
+                            <span class="tech-tag">Retention Modeling</span>
+                            <span class="tech-tag">Satisfaction Analysis</span>
+                            <span class="tech-tag">Predictive Analytics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Data → Behavior Analysis → Churn Prediction → Retention → Strategy → Results</div>
+                            <div class="architecture-item">Interaction Data → Analysis → Prediction → Intervention → Retention → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Call interaction history</li>
+                                <li>Customer satisfaction scores</li>
+                                <li>Complaint patterns</li>
+                                <li>Service usage data</li>
+                                <li>Payment history</li>
+                                <li>Demographic information</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Churn Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Retention Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Customer Lifetime Value</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FCR Probability Scoring -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">✅</div>
+                        <div>
+                            <div class="card-title">FCR Probability</div>
+                            <div class="card-subtitle">Resolution Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Score the probability of First Call Resolution to optimize agent training, knowledge base content, and call routing.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Resolution Analysis</span>
+                            <span class="tech-tag">FCR Scoring</span>
+                            <span class="tech-tag">Call Routing</span>
+                            <span class="tech-tag">Knowledge Management</span>
+                            <span class="tech-tag">Agent Training</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Call Data → Resolution Analysis → Scoring → Routing → Training → Improvement</div>
+                            <div class="architecture-item">Issue Data → Analysis → Scoring → Knowledge → Optimization → Resolution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical resolution data</li>
+                                <li>Issue type categorization</li>
+                                <li>Agent expertise levels</li>
+                                <li>Knowledge base effectiveness</li>
+                                <li>Customer complexity</li>
+                                <li>Previous interaction history</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Resolution Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">FCR Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Escalation Risk Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🚨</div>
+                        <div>
+                            <div class="card-title">Escalation Risk</div>
+                            <div class="card-subtitle">Risk Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict the likelihood of call escalation to optimize routing, agent preparation, and de-escalation strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Escalation Prediction</span>
+                            <span class="tech-tag">Call Routing</span>
+                            <span class="tech-tag">De-escalation</span>
+                            <span class="tech-tag">Agent Preparation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Call Data → Risk Analysis → Prediction → Routing → Preparation → Resolution</div>
+                            <div class="architecture-item">Customer Data → Analysis → Risk → Strategy → Handling → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer tone and language</li>
+                                <li>Issue complexity</li>
+                                <li>Previous escalation history</li>
+                                <li>Agent experience levels</li>
+                                <li>Time pressure factors</li>
+                                <li>Resolution expectations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Escalation Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Escalation Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Agent Preparedness</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Sentiment Detection -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">😊</div>
+                        <div>
+                            <div class="card-title">Customer Sentiment</div>
+                            <div class="card-subtitle">Emotion Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Detect customer emotions and sentiment in real-time to optimize agent responses, improve satisfaction, and prevent escalations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Sentiment Analysis</span>
+                            <span class="tech-tag">Emotion Detection</span>
+                            <span class="tech-tag">Real-time Analysis</span>
+                            <span class="tech-tag">Voice Analytics</span>
+                            <span class="tech-tag">Customer Experience</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Voice Data → Emotion Analysis → Sentiment Detection → Agent Alert → Response → Satisfaction</div>
+                            <div class="architecture-item">Speech Data → Analysis → Detection → Optimization → Response → Experience</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Voice tone analysis</li>
+                                <li>Speech pattern recognition</li>
+                                <li>Language sentiment analysis</li>
+                                <li>Historical interaction data</li>
+                                <li>Response effectiveness</li>
+                                <li>Resolution outcomes</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Sentiment Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Escalation Prevention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, communication, and assistance for customer service optimization, agent support, and customer experience enhancement
+            </p>
+
+            <div class="card-grid">
+                <!-- Real-Time Agent Assist -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🤖</div>
+                        <div>
+                            <div class="card-title">Real-Time Agent Assist</div>
+                            <div class="card-subtitle">Response Suggestions</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide real-time response suggestions and knowledge base recommendations to agents during customer interactions to improve resolution quality and speed.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Real-time Assistance</span>
+                            <span class="tech-tag">Response Generation</span>
+                            <span class="tech-tag">Knowledge Integration</span>
+                            <span class="tech-tag">Agent Support</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Input → Analysis → Response Generation → Agent Display → Customer Response → Resolution</div>
+                            <div class="architecture-item">Call Data → Processing → Suggestions → Agent → Response → Satisfaction</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer query analysis</li>
+                                <li>Knowledge base integration</li>
+                                <li>Response templates</li>
+                                <li>Agent performance data</li>
+                                <li>Resolution history</li>
+                                <li>Customer preferences</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Resolution Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 seconds</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automatic Call Summarization -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📝</div>
+                        <div>
+                            <div class="card-title">Call Summarization</div>
+                            <div class="card-subtitle">Post-Call Notes</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically generate comprehensive call summaries and post-call notes to reduce agent workload and improve documentation accuracy.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Call Summarization</span>
+                            <span class="tech-tag">Note Generation</span>
+                            <span class="tech-tag">Documentation</span>
+                            <span class="tech-tag">Agent Efficiency</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Call Recording → Transcription → Analysis → Summary Generation → Notes → CRM Integration</div>
+                            <div class="architecture-item">Audio Data → Processing → Summarization → Documentation → Storage → Access</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Call audio recordings</li>
+                                <li>Speech-to-text conversion</li>
+                                <li>Key information extraction</li>
+                                <li>Summary templates</li>
+                                <li>CRM integration</li>
+                                <li>Quality assurance</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Summary Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Agent Time Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-60 seconds</div>
+                                <div class="metric-label">Summary Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email & Chat Response Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📧</div>
+                        <div>
+                            <div class="card-title">Email & Chat Response</div>
+                            <div class="card-subtitle">Communication Drafting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate personalized email and chat responses to customer inquiries to improve response time and maintain consistent communication quality.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Response Drafting</span>
+                            <span class="tech-tag">Email Generation</span>
+                            <span class="tech-tag">Chat Responses</span>
+                            <span class="tech-tag">Personalization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Message → Analysis → Response Generation → Agent Review → Sending → Follow-up</div>
+                            <div class="architecture-item">Inquiry Data → Processing → Drafting → Review → Communication → Resolution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer inquiry analysis</li>
+                                <li>Response templates</li>
+                                <li>Personalization rules</li>
+                                <li>Brand voice guidelines</li>
+                                <li>Response quality standards</li>
+                                <li>Follow-up requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-95%</div>
+                                <div class="metric-label">Response Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Response Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Base Answer Generation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📚</div>
+                        <div>
+                            <div class="card-title">Knowledge Base Answers</div>
+                            <div class="card-subtitle">Content Generation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate and update knowledge base articles with accurate, comprehensive answers to frequently asked questions and common issues.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Knowledge Management</span>
+                            <span class="tech-tag">Content Generation</span>
+                            <span class="tech-tag">FAQ Creation</span>
+                            <span class="tech-tag">Self-Service</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Queries → Analysis → Answer Generation → Review → Knowledge Base → Self-Service</div>
+                            <div class="architecture-item">Issue Data → Processing → Content → Validation → Publication → Access</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer question patterns</li>
+                                <li>Resolution procedures</li>
+                                <li>Product documentation</li>
+                                <li>FAQ databases</li>
+                                <li>Content quality standards</li>
+                                <li>Update frequency</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Content Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Self-Service Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Content Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalized Customer Communication -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🎯</div>
+                        <div>
+                            <div class="card-title">Personalized Communication</div>
+                            <div class="card-subtitle">Customer Engagement</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate personalized communication content tailored to individual customer preferences, history, and communication style.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Personalization</span>
+                            <span class="tech-tag">Customer Communication</span>
+                            <span class="tech-tag">Preference Analysis</span>
+                            <span class="tech-tag">Engagement Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Data → Preference Analysis → Personalization → Communication → Engagement → Results</div>
+                            <div class="architecture-item">Profile Data → Analysis → Customization → Messaging → Response → Satisfaction</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer profile data</li>
+                                <li>Communication history</li>
+                                <li>Preference patterns</li>
+                                <li>Interaction styles</li>
+                                <li>Response effectiveness</li>
+                                <li>Personalization rules</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Personalization Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Customer Engagement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Response Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complaint Response Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">⚠️</div>
+                        <div>
+                            <div class="card-title">Complaint Response</div>
+                            <div class="card-subtitle">Issue Resolution</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate empathetic and effective responses to customer complaints that address concerns and provide appropriate solutions.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Complaint Handling</span>
+                            <span class="tech-tag">Response Generation</span>
+                            <span class="tech-tag">Empathy Analysis</span>
+                            <span class="tech-tag">Resolution Strategies</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Complaint Data → Analysis → Response Generation → Empathy Check → Agent Review → Resolution</div>
+                            <div class="architecture-item">Issue Data → Processing → Response → Review → Communication → Satisfaction</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Complaint categorization</li>
+                                <li>Response templates</li>
+                                <li>Empathy guidelines</li>
+                                <li>Resolution procedures</li>
+                                <li>Customer history</li>
+                                <li>Escalation criteria</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-95%</div>
+                                <div class="metric-label">Resolution Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Response Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex customer service operations and call center management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous Virtual Customer Service Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🤖</div>
+                        <div>
+                            <div class="card-title">Autonomous Virtual Agent</div>
+                            <div class="card-subtitle">Self-Service Resolution</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide fully autonomous customer service through AI agents that can handle complex inquiries, resolve issues, and escalate when necessary.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Autonomous Service</span>
+                            <span class="tech-tag">Virtual Agent</span>
+                            <span class="tech-tag">Self-Service</span>
+                            <span class="tech-tag">Issue Resolution</span>
+                            <span class="tech-tag">Escalation Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Query → Agent Processing → Resolution Attempt → Escalation Decision → Human Handoff → Resolution</div>
+                            <div class="architecture-item">Inquiry → Analysis → Processing → Resolution → Escalation → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer inquiry patterns</li>
+                                <li>Resolution procedures</li>
+                                <li>Escalation criteria</li>
+                                <li>Knowledge base integration</li>
+                                <li>Agent performance metrics</li>
+                                <li>Customer satisfaction data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Resolution Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Escalation Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Agent Escalation Orchestrator -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔄</div>
+                        <div>
+                            <div class="card-title">Escalation Orchestrator</div>
+                            <div class="card-subtitle">Intelligent Routing</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Orchestrate seamless handoffs between bots, human agents, and specialists based on issue complexity, agent expertise, and customer needs.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Escalation Management</span>
+                            <span class="tech-tag">Intelligent Routing</span>
+                            <span class="tech-tag">Multi-Agent System</span>
+                            <span class="tech-tag">Handoff Orchestration</span>
+                            <span class="tech-tag">Expertise Matching</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Issue → Complexity Analysis → Agent Matching → Handoff → Specialist → Resolution</div>
+                            <div class="architecture-item">Issue Data → Analysis → Routing → Handoff → Expertise → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Issue complexity classification</li>
+                                <li>Agent expertise profiles</li>
+                                <li>Specialist availability</li>
+                                <li>Handoff protocols</li>
+                                <li>Customer preference data</li>
+                                <li>Resolution tracking</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Routing Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Resolution Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intelligent Case Management Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📋</div>
+                        <div>
+                            <div class="card-title">Case Management</div>
+                            <div class="card-subtitle">Workflow Automation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate case management workflows including ticket creation, status updates, follow-ups, and resolution tracking.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Case Management</span>
+                            <span class="tech-tag">Workflow Automation</span>
+                            <span class="tech-tag">Ticket Processing</span>
+                            <span class="tech-tag">Status Tracking</span>
+                            <span class="tech-tag">Follow-up Automation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Issue → Ticket Creation → Status Tracking → Follow-up → Resolution → Closure</div>
+                            <div class="architecture-item">Issue Data → Processing → Management → Tracking → Resolution → Completion</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Issue categorization</li>
+                                <li>Workflow templates</li>
+                                <li>Status tracking rules</li>
+                                <li>Follow-up schedules</li>
+                                <li>Resolution criteria</li>
+                                <li>Escalation triggers</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Workflow Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Case Resolution</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Follow-up Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proactive Retention Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">❤️</div>
+                        <div>
+                            <div class="card-title">Proactive Retention</div>
+                            <div class="card-subtitle">Customer Outreach</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Proactively identify at-risk customers and initiate personalized outreach campaigns to prevent churn and improve retention.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Retention Management</span>
+                            <span class="tech-tag">Proactive Outreach</span>
+                            <span class="tech-tag">Churn Prevention</span>
+                            <span class="tech-tag">Customer Engagement</span>
+                            <span class="tech-tag">Personalized Campaigns</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Data → Risk Analysis → Outreach Campaign → Personalization → Communication → Retention</div>
+                            <div class="architecture-item">Behavior Data → Analysis → Campaign → Outreach → Engagement → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer behavior patterns</li>
+                                <li>Churn indicators</li>
+                                <li>Outreach templates</li>
+                                <li>Personalization rules</li>
+                                <li>Engagement tracking</li>
+                                <li>Success metrics</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Churn Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Retention Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Outreach Success</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autonomous Refund Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💰</div>
+                        <div>
+                            <div class="card-title">Autonomous Refund</div>
+                            <div class="card-subtitle">Dispute Resolution</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically process refunds and resolve disputes by analyzing policies, customer history, and transaction data.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Refund Processing</span>
+                            <span class="tech-tag">Dispute Resolution</span>
+                            <span class="tech-tag">Policy Analysis</span>
+                            <span class="tech-tag">Transaction Review</span>
+                            <span class="tech-tag">Automated Approval</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Refund Request → Policy Analysis → Transaction Review → Approval Decision → Processing → Customer Notification</div>
+                            <div class="architecture-item">Request Data → Analysis → Review → Decision → Processing → Notification</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Refund policy rules</li>
+                                <li>Transaction history</li>
+                                <li>Customer history</li>
+                                <li>Approval criteria</li>
+                                <li>Processing workflows</li>
+                                <li>Notification templates</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Approval Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Processing Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workflow Automation Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚡</div>
+                        <div>
+                            <div class="card-title">Workflow Automation</div>
+                            <div class="card-subtitle">Process Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate routine call center tasks including CRM updates, ticket creation, billing actions, and data entry to improve efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Workflow Automation</span>
+                            <span class="tech-tag">Process Optimization</span>
+                            <span class="tech-tag">CRM Integration</span>
+                            <span class="tech-tag">Task Automation</span>
+                            <span class="tech-tag">Data Processing</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Task Trigger → Process Automation → System Updates → Data Entry → Verification → Completion</div>
+                            <div class="architecture-item">Trigger Event → Automation → Processing → Updates → Validation → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Task automation rules</li>
+                                <li>System integration</li>
+                                <li>Data validation</li>
+                                <li>Process workflows</li>
+                                <li>Error handling</li>
+                                <li>Performance monitoring</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Task Automation</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Process Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Error Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of customer service and call center operations</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of customer privacy, data security, and service quality standards
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
